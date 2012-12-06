@@ -5,6 +5,7 @@
 pom.xml
 *.jar
 *.class
+*.s??
 .lein-deps-sum
 .lein-failures
 .lein-plugins
