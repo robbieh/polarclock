@@ -80,11 +80,13 @@
   (push-style)
   (let [diam  (* 0.8 (min (width) (height)))
         tmdiam (* 0.7 (min (width) (height)))
+        sdiam (* 0.5 (min (width) (height)))
         x     (* (width) 0.5)
         y     (* (height) 0.5)
         stoprad  (minutes-to-radians (clj-time/minute (clj-time/now)))
         gmtrad  (hour-to-radians (clj-time/hour (clj-time/now)))
         hourrad  (hour-to-radians-12 (clj-time/hour (clj-time.local/local-now)))
+        secrad  (minutes-to-radians (clj-time/sec (clj-time.local/local-now)))
         onerad (radians 1)
         minofhourrad (/ stoprad 14)
         ]
@@ -128,6 +130,14 @@
     (stroke 250 25 25)
     (stroke-weight 5)
     (arc 0 0 tmdiam tmdiam (- gmtrad onerad) (+ gmtrad onerad))
+
+    (stroke 0 53 10)
+    (stroke-weight 50)
+    (arc 0 0 sdiam sdiam (- secrad PI) (+ secrad PI))
+    (stroke-weight 90)
+    (stroke 0 50 10)
+    (arc 0 0 sdiam sdiam (- secrad onerad) (+ secrad onerad))
+
     (pop-style)
     (pop-matrix)
     ))
