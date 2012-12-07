@@ -40,7 +40,7 @@
         y     (* (height) 0.5)]
     (translate x y)
     (doseq [day (range 0 30)]
-      (line 0 (* (height) (* 0.5 0.5))  0 (* (height) (* 0.6 0.5)))
+      (line 0 (* (height) (* 0.8 0.5))  0 (* (height) (* 0.9 0.5)))
       (rotate (radians-for-30d))
       )
     )
@@ -51,8 +51,8 @@
 (defn draw-radclock []
   (push-matrix)
   (push-style)
-  (let [diam  (* 0.9 (min (width) (height)))
-        tmdiam (* 0.8 (min (width) (height)))
+  (let [diam  (* 0.6 (min (width) (height)))
+        tmdiam (* 0.5 (min (width) (height)))
         x     (* (width) 0.5)
         y     (* (height) 0.5)
         stoprad  (minutes-to-radians (clj-time/minute (clj-time/now)))
