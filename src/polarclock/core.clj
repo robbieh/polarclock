@@ -28,25 +28,45 @@
 (defn radians-for-30d []
   (/ TWO-PI 30))
 
+(defn draw-icon-at [r y]
+  ;this is just sort of a dummy... it only draws a circle...
+  (push-matrix)
+  (push-style)
+  (rotate r)
+  (stroke 100)
+  (stroke-weight 2)
+  (ellipse 0 y 10 10)
+  (pop-style)
+  (pop-matrix))
+
 (defn draw-monthicons [] ; MEGATODO: this.
+  (push-matrix)
+  (push-style)
+  (draw-icon-at 0 (* (height) (* 0.85 0.5)))
+  (pop-style)
+  (pop-matrix) 
   )
 
 (defn draw-monthclock []
+  (rotate (- PI))
   (push-matrix)
   (push-style)
-  (stroke 000 075 055)
+  (stroke 0 75 55)
   (stroke-weight 1)
   (let [x     (* (width) 0.5)
         y     (* (height) 0.5)]
-    (translate x y)
     (doseq [day (range 0 30)]
       (line 0 (* (height) (* 0.8 0.5))  0 (* (height) (* 0.9 0.5)))
       (rotate (radians-for-30d))
       )
     )
+  (stroke-weight 3)
+  (stroke 0 95 75)
+  (pop-matrix)(push-matrix)
+  (rotate (* (clj-time/day (clj-time/now)) (radians-for-30d)))
+    (line 0 (* (height) (* 0.75 0.5))  0 (* (height) (* 0.9 0.5)))
   (pop-style)
-  (pop-matrix)
-  )
+  (pop-matrix))
 
 (defn draw-radclock []
   (push-matrix)
@@ -60,7 +80,6 @@
         hourrad  (hour-to-radians-12 (clj-time/hour (clj-time.local/local-now)))
         onerad (radians 1)
         ]
-    (translate x y)
     (rotate (- HALF-PI))
 
     ; the minutes ; draw two-part outline
@@ -91,9 +110,14 @@
     ))
 
 (defn draw-stuff []
-  (background 0 10 2)
+  (let [x     (* (width) 0.5)
+        y     (* (height) 0.5)]
+    (translate x y))
+;  (background 0 10 2)
+  (background 0 50 10)
   (draw-radclock)
   (draw-monthclock)
+;  (draw-monthicons)
   )
 
 (defsketch example
