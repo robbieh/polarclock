@@ -27,7 +27,7 @@
 ;  (
 
 (defn draw-radclock []
-  (background 180 200 150)
+  (background 180 200 120)
   (let [diam  (* 0.9 (min (width) (height)))
         tmdiam (* 0.8 (min (width) (height)))
         x     (* (width) 0.5)
@@ -39,18 +39,22 @@
         ]
     (translate x y)
     (rotate (- HALF-PI))
-    (stroke 0 255 0)
+
+    ; the minutes ; draw two-part outline
+    (stroke 50 200 95)
     (stroke-weight 20)
     (arc 0 0 diam diam 0 stoprad)
-    (stroke 0 100 0)
+    (stroke 0 130 40)
     (stroke-weight 16)
     (arc 0 0 diam diam 0 stoprad)
+
     ; let's see... red 'dot' on the GMT hour
-    (stroke 200 50 50)
+    (stroke 250 25 25)
     (stroke-weight 5)
     (arc 0 0 tmdiam tmdiam (- gmtrad onerad) (+ gmtrad onerad))
+
     ; an hour-size mark for the hour
-    (stroke 0 255 0)
+    (stroke 50 200 95)
     (stroke-weight 1)
     (arc 0 0 tmdiam tmdiam hourrad (+ hourrad (radians 30))) ; 30 because 12h clock!
     (stroke-weight 1)
