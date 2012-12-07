@@ -27,7 +27,7 @@
 ;  (
 
 (defn draw-radclock []
-  (background 180 200 120)
+  (background 0 10 2)
   (let [diam  (* 0.9 (min (width) (height)))
         tmdiam (* 0.8 (min (width) (height)))
         x     (* (width) 0.5)
@@ -41,10 +41,10 @@
     (rotate (- HALF-PI))
 
     ; the minutes ; draw two-part outline
-    (stroke 50 200 95)
+    (stroke 0 200 10)
     (stroke-weight 20)
     (arc 0 0 diam diam 0 stoprad)
-    (stroke 0 130 40)
+    (stroke 0 60 0)
     (stroke-weight 16)
     (arc 0 0 diam diam 0 stoprad)
 
