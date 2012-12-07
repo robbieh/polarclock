@@ -109,10 +109,10 @@
     ; the minutes ; draw two-part outline
     (stroke 0 220 20)
     (stroke-weight 3)
-    (arc 0 0 diam diam 0 minofhourrad)
+    (arc 0 0 diam diam 0 (+ minofhourrad hourrad))
     (let []
       (push-matrix)
-      (rotate (+ 0 minofhourrad))
+      (rotate (+ minofhourrad hourrad (- HALF-PI)))
       (line 0 (* tmdiam 0.5)  0 (* diam 0.5))
       (pop-matrix)
       )
