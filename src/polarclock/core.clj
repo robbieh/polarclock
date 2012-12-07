@@ -23,7 +23,7 @@
 (defn days-in-this-month [] 30) ; TODO: HA HA THIS IS BROKEN
 
 (defn minutes-to-radians [minutes]
-  (radians minutes))
+  (* TWO-PI (radians minutes)))
 
 (defn radians-for-30d []
   (/ TWO-PI 30))
