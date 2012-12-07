@@ -20,14 +20,37 @@
 (defn hour-to-radians-12 [hr]
   (* 2 (hour-to-radians (if (> 12 hr) hr (- hr 12)))))
 
+(defn days-in-this-month [] 30) ; TODO: HA HA THIS IS BROKEN
+
 (defn minutes-to-radians [minutes]
   (radians minutes))
 
-;(defn radians-for-this-month []
-;  (
+(defn radians-for-30d []
+  (/ TWO-PI 30))
+
+(defn draw-monthicons [] ; MEGATODO: this.
+  )
+
+(defn draw-monthclock []
+  (push-matrix)
+  (push-style)
+  (stroke 000 075 055)
+  (stroke-weight 1)
+  (let [x     (* (width) 0.5)
+        y     (* (height) 0.5)]
+    (translate x y)
+    (doseq [day (range 0 30)]
+      (line 0 (* (height) (* 0.4 0.5))  0 (* (height) (* 0.5 0.5)))
+      (rotate (radians-for-30d))
+      )
+    )
+  (pop-style)
+  (pop-matrix)
+  )
 
 (defn draw-radclock []
-  (background 0 10 2)
+  (push-matrix)
+  (push-style)
   (let [diam  (* 0.9 (min (width) (height)))
         tmdiam (* 0.8 (min (width) (height)))
         x     (* (width) 0.5)
@@ -58,17 +81,25 @@
     (stroke-weight 1)
     (arc 0 0 tmdiam tmdiam hourrad (+ hourrad (radians 30))) ; 30 because 12h clock!
     (stroke-weight 1)
-;   ;this shows 'hour markers' for a 24h clock
-;    (doseq [x (range 0 23)]
-;      (let [h (hour-to-radians x)
-;            rdiff (radians 1)]
-;            (arc 0 0 tmdiam tmdiam (- h rdiff) (+ h rdiff))))
-  ))
+    ;   ;this shows 'hour markers' for a 24h clock
+    ;    (doseq [x (range 0 23)]
+    ;      (let [h (hour-to-radians x)
+    ;            rdiff (radians 1)]
+    ;            (arc 0 0 tmdiam tmdiam (- h rdiff) (+ h rdiff))))
+    (pop-style)
+    (pop-matrix)
+    ))
+
+(defn draw-stuff []
+  (background 0 10 2)
+  (draw-radclock)
+  (draw-monthclock)
+  )
 
 (defsketch example
            :title "polar clock"
            :setup setup
-           :draw draw-radclock
+           :draw draw-stuff
            :size [500 500])
 
 (defn -main
