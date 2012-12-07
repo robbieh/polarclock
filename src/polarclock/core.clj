@@ -110,7 +110,7 @@
     (stroke-weight 4)
     (let [minofhourrad (/ stoprad 14)
           ]
-      (arc 0 0 tmdiam tmdiam (+ hourrad minofhourrad) (+ hourrad minofhourrad)))
+      (arc 0 0 tmdiam tmdiam (+ hourrad minofhourrad -0.01) (+ hourrad minofhourrad 0.01)))
 
     (pop-style)
     (pop-matrix)
