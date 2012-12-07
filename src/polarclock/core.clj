@@ -40,7 +40,7 @@
         y     (* (height) 0.5)]
     (translate x y)
     (doseq [day (range 0 30)]
-      (line 0 (* (height) (* 0.4 0.5))  0 (* (height) (* 0.5 0.5)))
+      (line 0 (* (height) (* 0.5 0.5))  0 (* (height) (* 0.6 0.5)))
       (rotate (radians-for-30d))
       )
     )
