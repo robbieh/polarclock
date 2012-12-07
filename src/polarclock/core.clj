@@ -41,10 +41,10 @@
     (rotate (- HALF-PI))
 
     ; the minutes ; draw two-part outline
-    (stroke 0 200 10)
+    (stroke 0 220 20)
     (stroke-weight 20)
     (arc 0 0 diam diam 0 stoprad)
-    (stroke 0 60 0)
+    (stroke 0 90 0)
     (stroke-weight 16)
     (arc 0 0 diam diam 0 stoprad)
 
