@@ -23,7 +23,7 @@
 (defn days-in-this-month [] 30) ; TODO: HA HA THIS IS BROKEN
 
 (defn minutes-to-radians [minutes]
-  (* TWO-PI (radians minutes)))
+  (radians (* 6 minutes)))
 
 (defn radians-for-30d []
   (/ TWO-PI 30))
@@ -83,11 +83,11 @@
     (rotate (- HALF-PI))
 
     ; the minutes ; draw two-part outline
-    (stroke 0 220 20)
+    (stroke 0 90 0)
     (stroke-weight 20)
     (arc 0 0 diam diam 0 stoprad)
-    (stroke 0 90 0)
-    (stroke-weight 16)
+    (stroke 0 220 20)
+    (stroke-weight 12)
     (arc 0 0 diam diam 0 stoprad)
 
     ; let's see... red 'dot' on the GMT hour
@@ -105,6 +105,13 @@
     ;      (let [h (hour-to-radians x)
     ;            rdiff (radians 1)]
     ;            (arc 0 0 tmdiam tmdiam (- h rdiff) (+ h rdiff))))
+
+    ; and an extra minute-dot on the hour...
+    (stroke-weight 4)
+    (let [minofhourrad (/ stoprad 14)
+          ]
+      (arc 0 0 tmdiam tmdiam (+ hourrad minofhourrad) (+ hourrad minofhourrad)))
+
     (pop-style)
     (pop-matrix)
     ))
