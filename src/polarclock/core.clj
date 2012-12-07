@@ -143,11 +143,12 @@
 ;  (draw-monthicons)
   )
 
-(defsketch example
+(defn mksk []
+  (defsketch example
            :title "polar clock"
            :setup setup
            :draw draw-stuff
-           :size [500 500])
+           :size [500 500]))
 
 (defn -main
   "I don't do a whole lot ... yet."
