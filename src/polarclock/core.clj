@@ -47,7 +47,8 @@
   )
 
 (defn draw-monthclock []
-  (rotate (- PI))
+;  (rotate (- PI))
+  (rotate (- HALF-PI))
   (push-matrix)
   (push-style)
   (stroke 0 75 25)
@@ -55,7 +56,7 @@
   (let [x     (* (width) 0.5)
         y     (* (height) 0.5)]
     (doseq [day (range 0 30)]
-      (line 0 (* (height) (* 0.90 0.5))  0 (* (height) (* 0.95 0.5)))
+      (line  (* (height) (* 0.90 0.5))  0 (* (height) (* 0.95 0.5)) 0)
       (rotate (radians-for-30d))
       )
     )
@@ -64,11 +65,10 @@
   (pop-matrix)(push-matrix)
   (let [diam (* 0.95 (min (width) (height)))]
     (rotate (* (clj-time/day (clj-time.local/local-now)) (radians-for-30d)))
-    (line 0 (* (height) (* 0.85 0.5))  0 (* (height) (* 0.95 0.5)))
+    (line  (* (height) (* 0.85 0.5))  0 (* (height) (* 0.95 0.5)) 0)
     (rotate (- (radians-for-30d)))
-    (line 0 (* (height) (* 0.85 0.5))  0 (* (height) (* 0.95 0.5)))
+    (line (* (height) (* 0.85 0.5))  0 (* (height) (* 0.95 0.5)) 0)
     (stroke-weight 5)
-    (rotate HALF-PI)
     (arc 0 0 diam diam 0 (radians-for-30d))
     )
   (pop-style)
@@ -114,8 +114,8 @@
     (arc 0 0 diam diam 0 (+ minofhourrad hourrad))
     (let []
       (push-matrix)
-      (rotate (+ minofhourrad hourrad (- HALF-PI)))
-      (line 0 (* tmdiam 0.5)  0 (* diam 0.5))
+      (rotate (+ minofhourrad hourrad ))
+      (line (* tmdiam 0.5)  0 (* diam 0.5) 0)
       (pop-matrix)
       )
 
