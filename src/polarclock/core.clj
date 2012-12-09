@@ -20,8 +20,6 @@
 (defn hour-to-radians-12 [hr]
   (* 2 (hour-to-radians (if (> 12 hr) hr (- hr 12)))))
 
-(defn days-in-this-month [] 30) ; TODO: HA HA THIS IS BROKEN
-
 (defn minutes-to-radians [minutes]
   (radians (* 6 minutes)))
 
@@ -30,6 +28,7 @@
 
 (defn draw-icon-at [r y]
   ;this is just sort of a dummy... it only draws a circle...
+  ;but later it should draw useful icons
   (push-matrix)
   (push-style)
   (rotate r)
@@ -64,7 +63,7 @@
   (stroke 10 95 0)
   (pop-matrix)(push-matrix)
   (let [diam (* 0.95 (min (width) (height)))]
-    (rotate (* (clj-time/day (clj-time/now)) (radians-for-30d)))
+    (rotate (* (clj-time/day (clj-time.local/local-now)) (radians-for-30d)))
     (line 0 (* (height) (* 0.85 0.5))  0 (* (height) (* 0.95 0.5)))
     (rotate (- (radians-for-30d)))
     (line 0 (* (height) (* 0.85 0.5))  0 (* (height) (* 0.95 0.5)))
@@ -97,6 +96,7 @@
     (stroke 0 220 20)
     (stroke-weight 3)
     (arc 0 0 tmdiam tmdiam hourrad (+ hourrad (radians 30))) ; 30 because 12h clock!
+
     ;   ;this shows 'hour markers' for a 24h clock
     ;    (doseq [x (range 0 23)]
     ;      (let [h (hour-to-radians x)
@@ -108,7 +108,7 @@
     (stroke-weight 5)
     (arc 0 0 tmdiam tmdiam (+ hourrad minofhourrad -0.01) (+ hourrad minofhourrad 0.01))
 
-    ; the minutes ; draw two-part outline
+    ; the minutes ; drawn in two parts
     (stroke 0 220 20)
     (stroke-weight 3)
     (arc 0 0 diam diam 0 (+ minofhourrad hourrad))
@@ -161,7 +161,6 @@
            :size [500 500]))
 
 (defn -main
-  "I don't do a whole lot ... yet."
   [& args]
   (mksk))
 
