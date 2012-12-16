@@ -26,6 +26,12 @@
 (defn radians-for-30d []
   (/ TWO-PI 30))
 
+(defn calNow []
+  (Calendar/getInstance))
+
+(defn radians-for-this-month []
+  (/ TWO-PI (.getActualMaximum (calNow) Calendar/DAY_OF_MONTH)))
+
 (defn draw-icon-at [r y]
   ;this is just sort of a dummy... it only draws a circle...
   ;but later it should draw useful icons
@@ -55,21 +61,21 @@
   (stroke-weight 1)
   (let [x     (* (width) 0.5)
         y     (* (height) 0.5)]
-    (doseq [day (range 0 30)]
+    (doseq [day (range 0 (.getActualMaximum (calNow) java.util.Calendar/DAY_OF_MONTH))]
       (line  (* (height) (* 0.90 0.5))  0 (* (height) (* 0.95 0.5)) 0)
-      (rotate (radians-for-30d))
+      (rotate (radians-for-this-month))
       )
     )
   (stroke-weight 3)
   (stroke 10 95 0)
   (pop-matrix)(push-matrix)
   (let [diam (* 0.95 (min (width) (height)))]
-    (rotate (* (clj-time/day (clj-time.local/local-now)) (radians-for-30d)))
+    (rotate (* (clj-time/day (clj-time.local/local-now)) (radians-for-this-month)))
     (line  (* (height) (* 0.85 0.5))  0 (* (height) (* 0.95 0.5)) 0)
-    (rotate (- (radians-for-30d)))
+    (rotate (- (radians-for-this-month)))
     (line (* (height) (* 0.85 0.5))  0 (* (height) (* 0.95 0.5)) 0)
     (stroke-weight 5)
-    (arc 0 0 diam diam 0 (radians-for-30d))
+    (arc 0 0 diam diam 0 (radians-for-this-month))
     )
   (pop-style)
   (pop-matrix))
